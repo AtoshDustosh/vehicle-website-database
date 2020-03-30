@@ -3,7 +3,9 @@ CREATE TABLE VehicleBrand (
 	`vehicle_brand_id` INTEGER,
 	`vehicle_brand_name` VARCHAR(45),
 	PRIMARY KEY (`vehicle_brand_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 INSERT INTO VehicleBrand VALUES
 	(1, 'A'),
 	(2, 'B'),
@@ -18,7 +20,9 @@ CREATE TABLE VehicleType (
 	`sale_status` TINYINT,
 	PRIMARY KEY (`vehicle_type_id`),
 	FOREIGN KEY (`vehicle_brand_id`) REFERENCES VehicleBrand(`vehicle_brand_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 INSERT INTO VehicleType VALUES
 	('A123-1', 1, 220, 1),
 	('B324-2', 2, 230, 1),
@@ -33,7 +37,9 @@ CREATE TABLE VehicleColour (
 	`vehicle_colour` VARCHAR(45),
 	PRIMARY KEY (`vehicle_type_id`, `vehicle_colour`),
 	FOREIGN KEY (`vehicle_type_id`) REFERENCES VehicleType(`vehicle_type_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 INSERT INTO VehicleColour VALUES
 	('A123-1', 'white'),
 	('A123-1', 'black'),
@@ -47,7 +53,9 @@ INSERT INTO VehicleColour VALUES
 CREATE TABLE Shop (
 	`shop_id` VARCHAR(45),
 	PRIMARY KEY (`shop_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 INSERT INTO Shop VALUES
 	('S-A-1'),
 	('S-B-1'),
@@ -59,7 +67,9 @@ INSERT INTO Shop VALUES
 CREATE TABLE Manufacturer (
 	`manufacturer_id` VARCHAR(45),
 	PRIMARY KEY (`manufacturer_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 INSERT INTO Manufacturer VALUES
 	('M-A-1'),
 	('M-B-1'),
@@ -70,7 +80,9 @@ INSERT INTO Manufacturer VALUES
 CREATE TABLE WebUser (
 	`user_id` VARCHAR(45),
 	`phone` VARCHAR(45)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 INSERT INTO WebUser VALUES
 	('aaa', '123456789'),
 	('bbb', '987654321')
@@ -89,7 +101,9 @@ CREATE TABLE VehicleEvaluation (
 	FOREIGN KEY (`vehicle_type_id`) REFERENCES VehicleType(`vehicle_type_id`),
 	FOREIGN KEY (`user_id`) REFERENCES WebUser(`user_id`),
 	FOREIGN KEY (`shop_id`) REFERENCES Shop(`shop_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 # 作品（作品ID，用户ID，作品类型，作品内容）
 CREATE TABLE Works (
@@ -99,7 +113,9 @@ CREATE TABLE Works (
 	`works_content` TEXT,
 	PRIMARY KEY (`works_id`),
 	FOREIGN KEY (`user_id`) REFERENCES WebUser(`user_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 # 作品回复（回复ID，用户ID，作品ID，回复内容）
 CREATE TABLE WorksReply (
@@ -110,7 +126,9 @@ CREATE TABLE WorksReply (
 	PRIMARY KEY (`reply_id`),
 	FOREIGN KEY (`user_id`) REFERENCES WebUser(`user_id`),
 	FOREIGN KEY (`works_id`) REFERENCES Works(`works_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 	
 # 订单（订单ID，用户ID，经销商ID，车型ID，订单日期）
 CREATE TABLE Indent (
@@ -123,7 +141,9 @@ CREATE TABLE Indent (
 	FOREIGN KEY (`user_id`) REFERENCES WebUser(`user_id`),
 	FOREIGN KEY (`shop_id`) REFERENCES Shop(`shop_id`),
 	FOREIGN KEY (`vehicle_type_id`) REFERENCES VehicleType(`vehicle_type_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 # 车系生产（生产商ID，车系ID）
 CREATE TABLE VehicleBrandManufacture (
@@ -132,7 +152,9 @@ CREATE TABLE VehicleBrandManufacture (
 	PRIMARY KEY (`manufacturer_id`, `vehicle_brand_id`),
 	FOREIGN KEY (`manufacturer_id`) REFERENCES Manufacturer(`manufacturer_id`),
 	FOREIGN KEY (`vehicle_brand_id`) REFERENCES VehicleBrand(`vehicle_brand_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 # 车型生产（生产商ID，车型ID，生产数量）
 CREATE TABLE VehicleTypeManufacture (
@@ -142,7 +164,9 @@ CREATE TABLE VehicleTypeManufacture (
 	PRIMARY KEY (`manufacturer_id`, `vehicle_type_id`),
 	FOREIGN KEY (`manufacturer_id`) REFERENCES Manufacturer(`manufacturer_id`),
 	FOREIGN KEY (`vehicle_type_id`) REFERENCES VehicleType(`vehicle_type_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 # 车型经销（经销商ID，车型ID，售价）
 CREATE TABLE VehicleTypeShop (
@@ -152,7 +176,9 @@ CREATE TABLE VehicleTypeShop (
 	PRIMARY KEY (`shop_id`, `vehicle_type_id`),
 	FOREIGN KEY (`shop_id`) REFERENCES Shop(`shop_id`),
 	FOREIGN KEY (`vehicle_type_id`) REFERENCES VehicleType(`vehicle_type_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 # 用户好友（用户ID，用户ID）
 CREATE TABLE UserFriend (
@@ -161,7 +187,9 @@ CREATE TABLE UserFriend (
 	PRIMARY KEY (`user_idx`, `user_idy`),
 	FOREIGN KEY (`user_idx`) REFERENCES WebUser(`user_id`),
 	FOREIGN KEY (`user_idy`) REFERENCES WebUser(`user_id`)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 	
 # 车系作品（作品ID，车系ID）
 CREATE TABLE WorksAboutVehicleBrand (
@@ -170,7 +198,9 @@ CREATE TABLE WorksAboutVehicleBrand (
 	PRIMARY KEY (`works_id`, `vehicle_brand_id`),
 	FOREIGN KEY (`works_id`) REFERENCES Works(`works_id`),
 	FOREIGN KEY (`vehicle_brand_id`) REFERENCES VehicleBrand(`vehicle_brand_id`)
-);	
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;	
 
 /*
 车系 - vehicle brand
