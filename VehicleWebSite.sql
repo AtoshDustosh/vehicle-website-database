@@ -16,15 +16,15 @@ CREATE TABLE VehicleType (
 	`vehicle_brand_id` INTEGER,
 	`vehicle_speed` SMALLINT,
 	`sale_status` TINYINT,
-	PRIMARY KEY (`type_id`),
+	PRIMARY KEY (`vehicle_type_id`),
 	FOREIGN KEY (`vehicle_brand_id`) REFERENCES VehicleBrand(`vehicle_brand_id`)
 );
 INSERT INTO VehicleType VALUES
-	('A123-1', 'A', 220, 1),
-	('B324-2', 'B', 230, 1),
-	('A123-9', 'A', 220, 1),
-	('C8-2', 'C', 300, 1),
-	('C0-0', 'C', 400, 0)
+	('A123-1', 1, 220, 1),
+	('B324-2', 2, 230, 1),
+	('A123-9', 1, 220, 1),
+	('C8-2', 3, 300, 1),
+	('C0-0', 3, 400, 0)
 ;
 
 # 车型颜色（车型ID，颜色）
