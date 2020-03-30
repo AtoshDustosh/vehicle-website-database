@@ -79,7 +79,8 @@ INSERT INTO Manufacturer VALUES
 # 用户（用户ID，电话号码）
 CREATE TABLE WebUser (
 	`user_id` VARCHAR(45),
-	`phone` VARCHAR(45)
+	`phone` VARCHAR(45),
+    PRIMARY KEY (`user_id`)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -148,7 +149,7 @@ DEFAULT CHARACTER SET = utf8;
 # 车系生产（生产商ID，车系ID）
 CREATE TABLE VehicleBrandManufacture (
 	`manufacturer_id` VARCHAR(45),
-	`vehicle_brand_id` VARCHAR(45),
+	`vehicle_brand_id` INTEGER,
 	PRIMARY KEY (`manufacturer_id`, `vehicle_brand_id`),
 	FOREIGN KEY (`manufacturer_id`) REFERENCES Manufacturer(`manufacturer_id`),
 	FOREIGN KEY (`vehicle_brand_id`) REFERENCES VehicleBrand(`vehicle_brand_id`)
@@ -194,7 +195,7 @@ DEFAULT CHARACTER SET = utf8;
 # 车系作品（作品ID，车系ID）
 CREATE TABLE WorksAboutVehicleBrand (
 	`works_id` VARCHAR(45),
-	`vehicle_brand_id` VARCHAR(45),
+	`vehicle_brand_id` INTEGER,
 	PRIMARY KEY (`works_id`, `vehicle_brand_id`),
 	FOREIGN KEY (`works_id`) REFERENCES Works(`works_id`),
 	FOREIGN KEY (`vehicle_brand_id`) REFERENCES VehicleBrand(`vehicle_brand_id`)
