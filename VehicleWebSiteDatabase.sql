@@ -69,10 +69,39 @@ CREATE TABLE VehicleEvaluation (
 INSERT INTO VehicleEvaluation VALUES
 	(1, 'A123-9', 'aaa', 'BMW', ???, ???, 8.5)
 
-作品（作品ID，用户ID，作品类型，作品内容）
+作品类型（作品类型ID，作品类型名称）
+CREATE TABLE WorksType (
+	'works_type_id' TINYINT,
+	'works_type_name' VARCHAR(45),
+	PRIMARY KEY ('works_type_id')
+);
+INSERT INTO WorksType VALUES
+	(1, 'video'),
+	(2, 'article')
+;
 
+作品（作品ID，用户ID，作品类型ID，作品内容）
+CREATE TABLE Works (
+	'works_id' VARCHAR(45),
+	'user_id' VARCHAR(255),
+	'works_type_id' TINYINT,
+	'works_content' VARBINARY,
+	PRIMARY KEY ('works_id'),
+	FOREIGN KEY ('user_id') REFERENCES WebUser('user_id'),
+	FOREIGN KEY ('works_type_id') REFERENCES WorksType('works_type_id')
+);
 
 作品回复（回复ID，用户ID，作品ID，回复内容）
+CREATE TABLE WorksReply (
+	'reply_id' VARCHAR(45),
+	'user_id' VARCHAR(255),
+	'works_id' VARCHAR(45),
+	'reply_content' VARBINARY,
+	PRIMARY KEY ('reply_id'),
+	FOREIGN KEY ('user_id') REFERENCES WebUser('user_id'),
+	FOREIGN KEY ('works_id') REFERENCES Works('works_id')
+);
+	
 订单（订单ID，用户ID，经销商ID，车型ID，订单日期）
 车系生产（生产商ID，车系ID）
 车型生产（生产商ID，车型ID，生产数量）
